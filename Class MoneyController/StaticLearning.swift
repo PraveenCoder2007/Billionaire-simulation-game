@@ -52,9 +52,9 @@ class CoinFlipGame: ObservableObject {
         resultImage = randomResult // Updates the image to match the coin flip result
         
         if userChoice.lowercased() == randomResult {
-            resultText = "You Won! It is \(randomResult.capitalized)"
+            resultText = "You Won! It is \(randomResult)"
         } else {
-            resultText = "You Lost! It is \(randomResult.capitalized)"
+            resultText = "You Lost! It is \(randomResult)"
         }
     }
 }
