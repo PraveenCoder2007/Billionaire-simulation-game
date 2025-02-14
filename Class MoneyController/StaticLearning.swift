@@ -44,7 +44,6 @@ class CoinFlipGame {
     
     static func flipCoin(userChoice: String) -> String {
         let randomResult = getRandomCoinSide()
-        // print("Coin Landed On: \(randomResult)")
         
         if userChoice == randomResult {
             return "You Won! It is a \(userChoice)"
