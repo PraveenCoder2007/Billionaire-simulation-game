@@ -5,61 +5,93 @@
 //  Created by praveen on 14/02/25.
 //
 
+//import SwiftUI
+//
+//class Person: ObservableObject {
+//    static let shared = Person()
+//    
+//    @Published var name: String = "Praveen"
+//    
+//    private init() {} // Private initializer to prevent creating other instances
+//}
+//
+//
+//struct StaticLearning: View {
+//    @StateObject var person: Person = Person.shared
+//   
+//    var body: some View {
+//        NavigationStack{
+//            VStack{
+//                Text(CoinFlipGame.flipCoin(userChoice: "Head" ))
+//            }
+//            }
+//    }
+//}
+//
+//#Preview {
+//    StaticLearning()
+//}
+import Foundation
 import SwiftUI
 
-class Person: ObservableObject {
-    static let shared = Person()
-    
-    @Published var name: String = "Praveen"
-    
-    private init() {} // Private initializer to prevent creating other instances
-}
-
-
-struct StaticLearning: View {
-    @StateObject var person: Person = Person.shared
-   
-    var body: some View {
-        NavigationStack{
-            VStack{
-                Text(CoinFlipGame.flipCoin(userChoice: "Head" ))
-            }
-            }
-    }
-}
-
-#Preview {
-    StaticLearning()
-}
-
-import Foundation
-enum coinImage: String, CaseIterable {
+enum CoinImage: String, CaseIterable {
     case tail = "tail"
     case head = "head"
-     
-}
-class CoinFlipGame {
-    
-    private static let coinSides: [String] = ["Head", "Tail"]
-    
-    private static func getRandomCoinSide() -> String {
-        return coinSides.randomElement()!
-    }
-    
-    static func flipCoin(userChoice: String) -> String {
-        let randomResult = getRandomCoinSide()
-        
-        if userChoice == randomResult {
-            return "You Won! It is a \(userChoice)"
-        } else {
-            return "You Lost! It is a \(randomResult)"
-        }
-    }
-    
-   
 }
 
-//let game = CoinFlipGame()
-//print("Press Enter To Flip The Coin")
-//_ = readLine()
-//game.flipCoin(userChoice: "Head")
+class CoinFlipGame: ObservableObject {
+    @Published var resultText: String = "Press Flip to Start"
+    @Published var resultImage: String = "placeholder" // Default image name
+
+    private func getRandomCoinSide() -> String {
+        return CoinImage.allCases.randomElement()!.rawValue
+    }
+    
+    func flipCoin(userChoice: String) {
+        let randomResult = getRandomCoinSide()
+        resultImage = randomResult // Updates the image to match the coin flip result
+        
+        if userChoice.lowercased() == randomResult {
+            resultText = "You Won! It is \(randomResult.capitalized)"
+        } else {
+            resultText = "You Lost! It is \(randomResult.capitalized)"
+        }
+    }
+}
+
+struct CoinFlipView: View {
+    @StateObject private var game = CoinFlipGame()
+    
+    var body: some View {
+        VStack(spacing: 20) {
+            Image(game.resultImage)
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+            
+            Text(game.resultText)
+                .font(.title2)
+                .padding()
+            
+            Button {
+                game.flipCoin(userChoice: "head") // Change input dynamically if needed
+            } label: {
+                Text("Flip Coin")
+                    .font(.headline)
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+        }
+        .padding()
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        CoinFlipView()
+    }
+}
+
+
