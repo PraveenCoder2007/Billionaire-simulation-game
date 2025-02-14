@@ -29,7 +29,7 @@ class Money: ObservableObject {
         if balance >= cost {
             balance -= cost
         } else {
-            print("Insufficient funds to make the purchase.")
+            print("Insufficien funds to make the purchase.")
         }
        
     }
