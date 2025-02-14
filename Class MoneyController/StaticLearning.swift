@@ -33,7 +33,10 @@ struct StaticLearning: View {
 }
 
 import Foundation
-
+enum coinImage: String, CaseIterable {
+    case head = "head"
+    case tail = "tail"  
+}
 class CoinFlipGame {
     
     private static let coinSides: [String] = ["Head", "Tail"]
