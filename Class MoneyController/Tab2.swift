@@ -1,9 +1,4 @@
-//
-//  Tab2.swift
-//  coinFlip
-//
-//  Created by Jeevith  on 16/02/25.
-//
+
 
 import SwiftUI
 

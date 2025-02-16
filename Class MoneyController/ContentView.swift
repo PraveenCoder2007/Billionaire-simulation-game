@@ -1,9 +1,4 @@
-//
-//  ContentView.swift
-//  Class MoneyController
-//
-//  Created by praveen on 13/02/25.
-//
+
 
 import Foundation
 
