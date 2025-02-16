@@ -34,7 +34,7 @@ class AppBackend: ObservableObject {
             money -= Float(betAmount)
         }
         
-        resultImage = outcome == 0 ? "head" : "tail"
+        resultImage = outcome == 0 ? "head1" : "tail1"
     }
 }
 
